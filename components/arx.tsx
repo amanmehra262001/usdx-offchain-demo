@@ -19,7 +19,7 @@ ChartJS.register(
   PointElement,
   LineElement
 );
-import { useGlobalContext } from "../../context/store";
+import { useGlobalContext } from "../context/store";
 import Slider from "@mui/material/Slider";
 
 export const ARXToken = () => {

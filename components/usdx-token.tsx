@@ -19,7 +19,7 @@ ChartJS.register(
   PointElement,
   LineElement
 );
-import { useGlobalContext } from "../../context/store";
+import { useGlobalContext } from "../context/store";
 import { useEffect, useState } from "react";
 import { handleUSDXGeneration } from "@/utils/helper-functions";
 import { toast } from "react-toastify";

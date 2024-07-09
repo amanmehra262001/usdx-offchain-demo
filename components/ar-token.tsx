@@ -11,7 +11,7 @@ import {
   LineElement,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { useGlobalContext } from "../../context/store";
+import { useGlobalContext } from "../context/store";
 
 ChartJS.register(
   ArcElement,

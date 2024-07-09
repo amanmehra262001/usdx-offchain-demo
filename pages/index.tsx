@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import { ARToken } from "./components/ar-token";
-import { ARXToken } from "./components/arx";
-import { USDXToken } from "./components/usdx-token";
-import { Processing } from "./components/processing";
-import { Balances } from "./components/balances";
+import { ARToken } from "../components/ar-token";
+import { ARXToken } from "../components/arx";
+import { USDXToken } from "../components/usdx-token";
+import { Processing } from "../components/processing";
+import { Balances } from "../components/balances";
 
 const inter = Inter({ subsets: ["latin"] });
 
