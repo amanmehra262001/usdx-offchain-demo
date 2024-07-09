@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <main className={`flex flex-col gap-4 p-4 ${inter.className}`}>
-      <section id="mainframe" className="grid grid-cols-3 gap-4">
+      <section id="mainframe" className="grid lg:grid-cols-3 gap-4">
         <USDXToken
           setUsdxPriceChartData={setUsdxPriceChartData}
           usdxPriceChartData={usdxPriceChartData}
@@ -30,7 +30,7 @@ export default function Home() {
           setAxPriceChartData={setAxPriceChartData}
         />
       </section>
-      <section className="flex">
+      <section className="lg:flex">
         <Processing />
         <Balances />
       </section>
