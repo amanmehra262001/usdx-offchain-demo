@@ -20,8 +20,10 @@ ChartJS.register(
   LineElement
 );
 import { useGlobalContext } from "../../context/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { handleUSDXGeneration } from "@/utils/helper-functions";
+import { toast } from "react-toastify";
+import Slider from "@mui/material/Slider";
 
 export const USDXToken = () => {
   const {
@@ -29,20 +31,96 @@ export const USDXToken = () => {
     setUsdxAmount,
     collatoralRatio,
     setArAmount,
+    arTotalSupply,
+    setArTotalSupply,
     setArxAmount,
+    arxTotalSupply,
+    setArxTotalSupply,
+    usdxTotalSupply,
+    setUsdxTotalSupply,
+    userArBalance,
+    userArxBalance,
+    setUserArBalance,
+    setUserArxBalance,
+    arxPrice,
+    setArxPrice,
+    arPrice,
+    setArPrice,
   } = useGlobalContext();
+  const [_usdxAmount, _setUsdxAmount] = useState<number>(0); // [1]
+  const [usdxPrice, setUsdxPrice] = useState<number>(1); // [2
   const handleValueChange = (e: any) => {
-    setUsdxAmount(e.target.value);
+    _setUsdxAmount(e.target.value);
+  };
+
+  const handleOnClickMint = () => {
+    setUsdxAmount(_usdxAmount);
+    setUsdxTotalSupply(
+      parseFloat(usdxTotalSupply.toString()) +
+        parseFloat(_usdxAmount.toString())
+    );
+
+    // Calculate AR and ARX amounts
+    const [_arAmount, _arxAmount] = handleUSDXGeneration(
+      _usdxAmount,
+      collatoralRatio,
+      arPrice,
+      arxPrice
+    );
+    setArTotalSupply(arTotalSupply + _arAmount);
+    setArxTotalSupply(arxTotalSupply + _arxAmount);
+    setUserArBalance(userArBalance - _arAmount);
+    setUserArxBalance(userArxBalance - _arxAmount);
+    toast.success(
+      `Deposited ${_arAmount.toFixed(2)} AR & ${_arxAmount.toFixed(2)} ARX`
+    );
+    toast.success(
+      _usdxAmount + " USDX minted successfully at CR " + collatoralRatio + "%"
+    );
+  };
+  const handleOnClickRedeem = () => {
+    setUsdxAmount(_usdxAmount);
+    setUsdxTotalSupply(
+      parseFloat(usdxTotalSupply.toString()) -
+        parseFloat(_usdxAmount.toString())
+    );
+
+    // Calculate AR and ARX amounts
+    const [_arAmount, _arxAmount] = handleUSDXGeneration(
+      _usdxAmount,
+      collatoralRatio,
+      arPrice,
+      arxPrice
+    );
+    setArTotalSupply(arTotalSupply - _arAmount);
+    setArxTotalSupply(arxTotalSupply - _arxAmount);
+    setUserArBalance(userArBalance + _arAmount);
+    setUserArxBalance(userArxBalance + _arxAmount);
+    toast.error(
+      _usdxAmount + " USDX redeemed successfully at CR " + collatoralRatio + "%"
+    );
+    toast.error(
+      `Received ${_arAmount.toFixed(2)} AR & ${_arxAmount.toFixed(2)} ARX`
+    );
   };
 
   useEffect(() => {
     const [_arAmount, _arxAmount] = handleUSDXGeneration(
       usdxAmount,
-      collatoralRatio
+      collatoralRatio,
+      arPrice,
+      arxPrice
     );
     setArAmount(_arAmount);
     setArxAmount(_arxAmount);
   }, [usdxAmount]);
+
+  useEffect(() => {
+    setUsdxPrice(
+      (arTotalSupply * arPrice + arxTotalSupply * arxPrice) / usdxTotalSupply
+    );
+  }, [arPrice, arxPrice, arTotalSupply, arxTotalSupply, usdxAmount]);
+
   return (
     <div className="bg-gray-800 flex flex-col w-full gap-10 rounded-xl p-4">
       <p className="text-center text-lg font-bold">USDX Token</p>
@@ -63,18 +141,38 @@ export const USDXToken = () => {
         width={600}
       />
       <div className="flex justify-between items-center gap-4">
-        {/* <Slider
+        <p>USDX amount:</p>
+        <div className="flex gap-2">
+          <input
+            type="number"
+            value={_usdxAmount}
+            onChange={handleValueChange}
+            className="bg-transparent border border-gray-300 rounded-md p-1 w-20 text-center"
+          />
+          <button
+            className="p-2 bg-blue-500 hover:bg-blue-600 rounded-md w-20"
+            onClick={handleOnClickMint}
+          >
+            Mint
+          </button>
+          <button
+            className="p-2 bg-red-500 hover:bg-red-600 rounded-md w-20"
+            onClick={handleOnClickRedeem}
+          >
+            Redeem
+          </button>
+        </div>
+      </div>
+      <div className="flex gap-4">
+        <p className="text-nowrap">USDX Price(${usdxPrice.toFixed(2) || 1})</p>
+        <Slider
           size="small"
-          defaultValue={70}
+          value={parseFloat(usdxPrice.toFixed(2)) || 1}
           aria-label="Small"
           valueLabelDisplay="auto"
-        /> */}
-        <p>USDX amount:</p>
-        <input
-          type="number"
-          value={usdxAmount}
-          onChange={handleValueChange}
-          className="bg-transparent border border-gray-300 rounded-md p-1 w-20 text-center"
+          min={0.5}
+          max={1.5}
+          disabled
         />
       </div>
     </div>

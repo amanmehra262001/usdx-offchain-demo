@@ -1,5 +1,4 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import {
   Chart as ChartJS,
@@ -25,7 +24,7 @@ ChartJS.register(
 );
 
 export const ARToken = () => {
-  const { arAmount, setArAmount, setUsdxAmount } = useGlobalContext();
+  const { arAmount, setArAmount, arPrice, setArPrice } = useGlobalContext();
 
   const handleValueChange = (e: any) => {
     setArAmount(e.target.value);
@@ -50,18 +49,26 @@ export const ARToken = () => {
         width={600}
       />
       <div className="flex justify-between items-center gap-4">
-        {/* <Slider
+        <p>AR amount:</p>
+        <div className="flex gap-2 items-center">
+          <input
+            type="number"
+            value={arAmount.toFixed(2)}
+            onChange={handleValueChange}
+            className="bg-transparent border border-gray-300 rounded-md p-1 w-20 text-center"
+          />
+        </div>
+      </div>
+      <div className="flex gap-4">
+        <p className="text-nowrap">AR Price(${arPrice})</p>
+        <Slider
           size="small"
-          defaultValue={70}
+          defaultValue={arPrice}
           aria-label="Small"
           valueLabelDisplay="auto"
-        /> */}
-        <p>AR amount:</p>
-        <input
-          type="number"
-          value={arAmount}
-          onChange={handleValueChange}
-          className="bg-transparent border border-gray-300 rounded-md p-1 w-20 text-center"
+          onChange={(e, value) => {
+            setArPrice(value as number);
+          }}
         />
       </div>
     </div>

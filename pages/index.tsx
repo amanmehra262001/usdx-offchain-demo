@@ -4,6 +4,7 @@ import { ARToken } from "./components/ar-token";
 import { ARXToken } from "./components/arx";
 import { USDXToken } from "./components/usdx-token";
 import { Processing } from "./components/processing";
+import { Balances } from "./components/balances";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +16,10 @@ export default function Home() {
         <ARToken />
         <ARXToken />
       </section>
-      <Processing />
+      <section className="flex">
+        <Processing />
+        <Balances />
+      </section>
     </main>
   );
 }

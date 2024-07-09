@@ -20,9 +20,10 @@ ChartJS.register(
   LineElement
 );
 import { useGlobalContext } from "../../context/store";
+import Slider from "@mui/material/Slider";
 
 export const ARXToken = () => {
-  const { arxAmount, setArxAmount } = useGlobalContext();
+  const { arxAmount, setArxAmount, arxPrice, setArxPrice } = useGlobalContext();
   const handleValueChange = (e: any) => {
     setArxAmount(e.target.value);
   };
@@ -46,18 +47,26 @@ export const ARXToken = () => {
         width={600}
       />
       <div className="flex justify-between items-center gap-4">
-        {/* <Slider
+        <p>ARX amount:</p>
+        <div className="flex gap-2 items-center">
+          <input
+            type="number"
+            value={arxAmount.toFixed(2)}
+            onChange={handleValueChange}
+            className="bg-transparent border border-gray-300 rounded-md p-1 w-20 text-center"
+          />
+        </div>
+      </div>
+      <div className="flex gap-4">
+        <p className="text-nowrap">ARX Price(${arxPrice})</p>
+        <Slider
           size="small"
-          defaultValue={70}
+          defaultValue={arxPrice}
           aria-label="Small"
           valueLabelDisplay="auto"
-        /> */}
-        <p>ARX amount:</p>
-        <input
-          type="number"
-          value={arxAmount}
-          onChange={handleValueChange}
-          className="bg-transparent border border-gray-300 rounded-md p-1 w-20 text-center"
+          onChange={(e, value) => {
+            setArxPrice(value as number);
+          }}
         />
       </div>
     </div>
