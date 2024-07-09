@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { useGlobalContext } from "../context/store";
+import { useEffect } from "react";
 
 ChartJS.register(
   ArcElement,
@@ -23,8 +24,14 @@ ChartJS.register(
   LineElement
 );
 
-export const ARToken = () => {
-  const { arAmount, setArAmount, arPrice, setArPrice } = useGlobalContext();
+export const ARToken = ({ arPriceChartData, setArPriceChartData }: any) => {
+  const { arAmount, setArAmount, arPrice, setArPrice, arLabels, setArLabels } =
+    useGlobalContext();
+
+  useEffect(() => {
+    setArPriceChartData((prev: any[]) => [...prev, arPrice.toFixed(2)]);
+    setArLabels((prev) => [...prev, arPriceChartData?.length.toString()]);
+  }, [arPrice]);
 
   const handleValueChange = (e: any) => {
     setArAmount(e.target.value);
@@ -34,11 +41,11 @@ export const ARToken = () => {
       <p className="text-center text-lg font-bold">AR Token</p>
       <Line
         data={{
-          labels: ["January", "February", "March", "April", "May", "June"],
+          labels: arLabels,
           datasets: [
             {
               label: "AR Token",
-              data: [65, 59, 80, 81, 56, 55],
+              data: arPriceChartData,
               fill: false,
               backgroundColor: "rgb(255, 99, 132)",
               borderColor: "rgba(255, 99, 132, 0.2)",

@@ -25,7 +25,10 @@ import { handleUSDXGeneration } from "@/utils/helper-functions";
 import { toast } from "react-toastify";
 import Slider from "@mui/material/Slider";
 
-export const USDXToken = () => {
+export const USDXToken = ({
+  setUsdxPriceChartData,
+  usdxPriceChartData,
+}: any) => {
   const {
     usdxAmount,
     setUsdxAmount,
@@ -46,6 +49,8 @@ export const USDXToken = () => {
     setArxPrice,
     arPrice,
     setArPrice,
+    setUsdxLabels,
+    usdxLabels,
   } = useGlobalContext();
   const [_usdxAmount, _setUsdxAmount] = useState<number>(0); // [1]
   const [usdxPrice, setUsdxPrice] = useState<number>(1); // [2
@@ -117,20 +122,26 @@ export const USDXToken = () => {
 
   useEffect(() => {
     setUsdxPrice(
-      (arTotalSupply * arPrice + arxTotalSupply * arxPrice) / usdxTotalSupply
+      (arTotalSupply * arPrice + arxTotalSupply * arxPrice) / usdxTotalSupply ||
+        1
     );
   }, [arPrice, arxPrice, arTotalSupply, arxTotalSupply, usdxAmount]);
+
+  useEffect(() => {
+    setUsdxPriceChartData((prev: any[]) => [...prev, usdxPrice.toFixed(2)]);
+    setUsdxLabels((prev) => [...prev, usdxPriceChartData?.length.toString()]);
+  }, [usdxPrice]);
 
   return (
     <div className="bg-gray-800 flex flex-col w-full gap-10 rounded-xl p-4">
       <p className="text-center text-lg font-bold">USDX Token</p>
       <Line
         data={{
-          labels: ["January", "February", "March", "April", "May", "June"],
+          labels: usdxLabels,
           datasets: [
             {
               label: "USDX Token",
-              data: [65, 59, 80, 81, 56, 55],
+              data: usdxPriceChartData,
               fill: false,
               backgroundColor: "rgb(255, 99, 132)",
               borderColor: "rgba(255, 99, 132, 0.2)",

@@ -92,15 +92,15 @@ const GlobalContext = createContext<Props | undefined>({
 
 export const GlobalContextProvider = ({ children }: any) => {
   const [arAmount, setArAmount] = useState<number>(0);
-  const [arLabels, setArLabels] = useState<string[]>([]);
+  const [arLabels, setArLabels] = useState<string[]>(["0"]);
   const [arTotalSupply, setArTotalSupply] = useState<number>(0);
   const [arData, setArData] = useState<number[]>([]);
   const [arxAmount, setArxAmount] = useState<number>(0);
-  const [arxLabels, setArxLabels] = useState<string[]>([]);
+  const [arxLabels, setArxLabels] = useState<string[]>(["0"]);
   const [arxTotalSupply, setArxTotalSupply] = useState<number>(0);
   const [arxData, setArxData] = useState<number[]>([]);
   const [usdxAmount, setUsdxAmount] = useState<number>(0);
-  const [usdxLabels, setUsdxLabels] = useState<string[]>([]);
+  const [usdxLabels, setUsdxLabels] = useState<string[]>(["0"]);
   const [usdxTotalSupply, setUsdxTotalSupply] = useState<number>(0);
   const [usdxData, setUsdxData] = useState<number[]>([]);
   const [collatoralRatio, setCollatoralRatio] = useState<number>(85);

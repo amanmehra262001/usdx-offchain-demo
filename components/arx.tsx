@@ -21,22 +21,36 @@ ChartJS.register(
 );
 import { useGlobalContext } from "../context/store";
 import Slider from "@mui/material/Slider";
+import { useEffect } from "react";
 
-export const ARXToken = () => {
-  const { arxAmount, setArxAmount, arxPrice, setArxPrice } = useGlobalContext();
+export const ARXToken = ({ axPriceChartData, setAxPriceChartData }: any) => {
+  const {
+    arxAmount,
+    setArxAmount,
+    arxPrice,
+    setArxPrice,
+    arxLabels,
+    setArxLabels,
+  } = useGlobalContext();
   const handleValueChange = (e: any) => {
     setArxAmount(e.target.value);
   };
+
+  useEffect(() => {
+    setAxPriceChartData((prev: any[]) => [...prev, arxPrice.toFixed(2)]);
+    setArxLabels((prev) => [...prev, axPriceChartData?.length.toString()]);
+  }, [arxPrice]);
+
   return (
     <div className="bg-gray-800 flex flex-col w-full gap-10 rounded-xl p-4">
       <p className="text-center text-lg font-bold">ARX Token</p>
       <Line
         data={{
-          labels: ["January", "February", "March", "April", "May", "June"],
+          labels: arxLabels,
           datasets: [
             {
               label: "ARX Token",
-              data: [65, 59, 80, 81, 56, 55],
+              data: axPriceChartData,
               fill: false,
               backgroundColor: "rgb(255, 99, 132)",
               borderColor: "rgba(255, 99, 132, 0.2)",
