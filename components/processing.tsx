@@ -4,6 +4,7 @@ import {
   handleUSDXGeneration,
 } from "@/utils/helper-functions";
 import { useEffect } from "react";
+import { isNull } from "util";
 
 export const Processing = () => {
   const {
@@ -34,6 +35,8 @@ export const Processing = () => {
     );
     if (arAmount !== _arAmount) setArAmount(_arAmount);
     if (arxAmount !== _arxAmount) setArxAmount(_arxAmount);
+
+    console.log("Collateral Ratio: ", collatoralRatio);
   }, [collatoralRatio]);
 
   useEffect(() => {
@@ -42,10 +45,12 @@ export const Processing = () => {
       arTotalSupply,
       arxPrice,
       arxTotalSupply,
-      usdxAmount
+      usdxTotalSupply
     );
-    setCollatoralRatio(collatoralRatio + collatoralChange);
-  }, [arPrice, arTotalSupply, arxPrice, arxTotalSupply]);
+    console.log("Collatoral Change: ", collatoralChange);
+    if (!isNaN(collatoralChange + collatoralRatio))
+      setCollatoralRatio(collatoralRatio + collatoralChange);
+  }, [arPrice, arTotalSupply, arxPrice, arxTotalSupply, usdxTotalSupply]);
 
   return (
     <div className="grid grid-cols-2 gap-4 w-1/2">

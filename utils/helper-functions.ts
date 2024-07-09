@@ -15,16 +15,16 @@ export const handleCollatoralRatio = (
   arTotalSupply: number,
   arxPrice: number,
   arxTotalPrice: number,
-  usdxAmount: number
+  usdxTotalSupply: number
 ) => {
   const targetPrice = 1;
   const arValue = arPrice * arTotalSupply;
   const arxValue = arxPrice * arxTotalPrice;
   const totalValue = arValue + arxValue;
-  const currentUSDXPrice = totalValue / usdxAmount;
+  const currentUSDXPrice = totalValue / usdxTotalSupply;
 
   const difference = targetPrice - currentUSDXPrice;
 
   // for each 0.1 step we deduce 0.2% from the collatoral ratio
-  return difference * 10 * 0.2;
+  return parseFloat((difference * 10 * 0.2).toFixed(2));
 };

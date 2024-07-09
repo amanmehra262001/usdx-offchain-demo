@@ -1,7 +1,7 @@
 import { useGlobalContext } from "@/context/store";
 
 export const Balances = () => {
-  const { userArBalance, userArxBalance, usdxAmount } = useGlobalContext();
+  const { userArBalance, userArxBalance, usdxTotalSupply } = useGlobalContext();
   return (
     <div className="flex flex-col w-1/2 gap-4">
       <p className="text-xl font-bold text-left">User Balances</p>
@@ -11,7 +11,7 @@ export const Balances = () => {
         <p>ARX Balance:</p>
         <p>{userArxBalance} ARX</p>
         <p>USDX Balance:</p>
-        <p>{usdxAmount} USDX</p>
+        <p>{usdxTotalSupply} USDX</p>
       </div>
     </div>
   );
