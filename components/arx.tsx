@@ -68,6 +68,7 @@ export const ARXToken = ({ axPriceChartData, setAxPriceChartData }: any) => {
             value={arxAmount.toFixed(2)}
             onChange={handleValueChange}
             className="bg-transparent border border-gray-300 rounded-md p-1 w-20 text-center"
+            disabled={true}
           />
         </div>
       </div>
