@@ -22,7 +22,10 @@ export const Processing = () => {
     arxPrice,
   } = useGlobalContext();
   const handleValueChange = (e: any) => {
-    setCollatoralRatio(e.target.value);
+    if (e.target.value <= 100) {
+
+      setCollatoralRatio(e.target.value);
+    }
   };
 
   useEffect(() => {
