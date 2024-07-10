@@ -58,12 +58,12 @@ export const USDXToken = ({
     _setUsdxAmount(e.target.value);
   };
 
+  const checkBeforeMint = () => {
+
+  }
+
   const handleOnClickMint = () => {
-    setUsdxAmount(_usdxAmount);
-    setUsdxTotalSupply(
-      parseFloat(usdxTotalSupply.toString()) +
-        parseFloat(_usdxAmount.toString())
-    );
+
 
     // Calculate AR and ARX amounts
     const [_arAmount, _arxAmount] = handleUSDXGeneration(
@@ -71,6 +71,15 @@ export const USDXToken = ({
       collatoralRatio,
       arPrice,
       arxPrice
+    );
+    if (_arAmount > userArBalance || _arxAmount > userArxBalance) {
+      alert("Not Enough AR or ARX to Mint USDX")
+      return
+    }
+    setUsdxAmount(_usdxAmount);
+    setUsdxTotalSupply(
+      parseFloat(usdxTotalSupply.toString()) +
+      parseFloat(_usdxAmount.toString())
     );
     setArTotalSupply(arTotalSupply + _arAmount);
     setArxTotalSupply(arxTotalSupply + _arxAmount);
@@ -87,7 +96,7 @@ export const USDXToken = ({
     setUsdxAmount(_usdxAmount);
     setUsdxTotalSupply(
       parseFloat(usdxTotalSupply.toString()) -
-        parseFloat(_usdxAmount.toString())
+      parseFloat(_usdxAmount.toString())
     );
 
     // Calculate AR and ARX amounts
@@ -97,6 +106,7 @@ export const USDXToken = ({
       arPrice,
       arxPrice
     );
+
     setArTotalSupply(arTotalSupply - _arAmount);
     setArxTotalSupply(arxTotalSupply - _arxAmount);
     setUserArBalance(userArBalance + _arAmount);
@@ -123,7 +133,7 @@ export const USDXToken = ({
   useEffect(() => {
     setUsdxPrice(
       (arTotalSupply * arPrice + arxTotalSupply * arxPrice) / usdxTotalSupply ||
-        1
+      1
     );
   }, [arPrice, arxPrice, arTotalSupply, arxTotalSupply, usdxAmount]);
 
@@ -163,6 +173,7 @@ export const USDXToken = ({
           <button
             className="p-2 bg-blue-500 hover:bg-blue-600 rounded-md w-20"
             onClick={handleOnClickMint}
+            disabled={userArBalance <= 0 || userArxBalance <= 0}
           >
             Mint
           </button>
