@@ -93,6 +93,10 @@ export const USDXToken = ({
     );
   };
   const handleOnClickRedeem = () => {
+    if (_usdxAmount > usdxTotalSupply) {
+      alert("Not Enough USDX to Redeem AR & ARX")
+      return
+    }
     setUsdxAmount(_usdxAmount);
     setUsdxTotalSupply(
       parseFloat(usdxTotalSupply.toString()) -
@@ -106,6 +110,8 @@ export const USDXToken = ({
       arPrice,
       arxPrice
     );
+
+
 
     setArTotalSupply(arTotalSupply - _arAmount);
     setArxTotalSupply(arxTotalSupply - _arxAmount);
