@@ -51,43 +51,43 @@ interface Props {
 
 const GlobalContext = createContext<Props | undefined>({
   arAmount: 0,
-  setArAmount: () => {},
+  setArAmount: () => { },
   arLabels: [],
-  setArLabels: () => {},
+  setArLabels: () => { },
   arTotalSupply: 0,
-  setArTotalSupply: () => {},
+  setArTotalSupply: () => { },
   arData: [],
-  setArData: () => {},
+  setArData: () => { },
   arxAmount: 0,
-  setArxAmount: () => {},
+  setArxAmount: () => { },
   arxLabels: [],
-  setArxLabels: () => {},
+  setArxLabels: () => { },
   arxTotalSupply: 0,
-  setArxTotalSupply: () => {},
+  setArxTotalSupply: () => { },
   arxData: [],
-  setArxData: () => {},
+  setArxData: () => { },
   usdxAmount: 0,
-  setUsdxAmount: () => {},
+  setUsdxAmount: () => { },
   usdxLabels: [],
-  setUsdxLabels: () => {},
+  setUsdxLabels: () => { },
   usdxTotalSupply: 0,
-  setUsdxTotalSupply: () => {},
+  setUsdxTotalSupply: () => { },
   usdxData: [],
-  setUsdxData: () => {},
+  setUsdxData: () => { },
   collatoralRatio: 0,
-  setCollatoralRatio: () => {},
+  setCollatoralRatio: () => { },
 
   // user
   userArBalance: 0,
-  setUserArBalance: () => {},
+  setUserArBalance: () => { },
   userArxBalance: 0,
-  setUserArxBalance: () => {},
+  setUserArxBalance: () => { },
 
   // prices
   arPrice: 0,
-  setArPrice: () => {},
+  setArPrice: () => { },
   arxPrice: 0,
-  setArxPrice: () => {},
+  setArxPrice: () => { },
 });
 
 export const GlobalContextProvider = ({ children }: any) => {
@@ -106,8 +106,8 @@ export const GlobalContextProvider = ({ children }: any) => {
   const [collatoralRatio, setCollatoralRatio] = useState<number>(85);
 
   // user
-  const [userArBalance, setUserArBalance] = useState<number>(1000);
-  const [userArxBalance, setUserArxBalance] = useState<number>(1000);
+  const [userArBalance, setUserArBalance] = useState<number>(1000000);
+  const [userArxBalance, setUserArxBalance] = useState<number>(1000000);
 
   // prices
   const [arPrice, setArPrice] = useState<number>(22);
