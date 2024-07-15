@@ -73,7 +73,7 @@ export const Processing = () => {
       <p>{usdxTotalSupply.toFixed(2)} USDX</p>
       <p>AR Backing:</p>
       <p>{arTotalSupply.toFixed(2)} AR</p>
-      <p>ARX Locked:</p>
+      <p>HRS Locked:</p>
       <p>{arxTotalSupply.toFixed(2)} ARX</p>
     </div>
   );

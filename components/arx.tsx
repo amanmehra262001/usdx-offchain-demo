@@ -43,13 +43,13 @@ export const ARXToken = ({ axPriceChartData, setAxPriceChartData }: any) => {
 
   return (
     <div className="bg-gray-800 flex flex-col w-full gap-10 rounded-xl p-4">
-      <p className="text-center text-lg font-bold">ARX Token</p>
+      <p className="text-center text-lg font-bold">HRS Token</p>
       <Line
         data={{
           labels: arxLabels,
           datasets: [
             {
-              label: "ARX Token",
+              label: "HRS Token",
               data: axPriceChartData,
               fill: false,
               backgroundColor: "rgb(255, 99, 132)",
@@ -61,7 +61,7 @@ export const ARXToken = ({ axPriceChartData, setAxPriceChartData }: any) => {
         width={600}
       />
       <div className="flex justify-between items-center gap-4">
-        <p>ARX amount:</p>
+        <p>HRS amount:</p>
         <div className="flex gap-2 items-center">
           <input
             type="number"
@@ -73,7 +73,7 @@ export const ARXToken = ({ axPriceChartData, setAxPriceChartData }: any) => {
         </div>
       </div>
       <div className="flex gap-4">
-        <p className="text-nowrap">ARX Price(${arxPrice})</p>
+        <p className="text-nowrap">HRS Price(${arxPrice})</p>
         <Slider
           size="small"
           defaultValue={arxPrice}

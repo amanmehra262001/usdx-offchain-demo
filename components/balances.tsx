@@ -8,7 +8,7 @@ export const Balances = () => {
       <div className="grid grid-cols-2 gap-4 max-h-min w-full">
         <p>AR Balance:</p>
         <p>{userArBalance} AR</p>
-        <p>ARX Balance:</p>
+        <p>HRS Balance:</p>
         <p>{userArxBalance} ARX</p>
         <p>USDX Balance:</p>
         <p>{usdxTotalSupply} USDX</p>
