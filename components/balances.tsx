@@ -9,7 +9,7 @@ export const Balances = () => {
         <p>AR Balance:</p>
         <p>{userArBalance} AR</p>
         <p>HRS Balance:</p>
-        <p>{userArxBalance} ARX</p>
+        <p>{userArxBalance} HRS</p>
         <p>USDX Balance:</p>
         <p>{usdxTotalSupply} USDX</p>
       </div>
